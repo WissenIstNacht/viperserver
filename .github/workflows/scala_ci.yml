@@ -47,7 +47,7 @@ jobs:
 #       run: cd viperServer; ln --symbolic ../silicon
     
     - name: Install Z3
-    - run: cd z3; python scripts/mk_make.py; cd build; make; sudo make install
+      run: cd z3; python scripts/mk_make.py; cd build; make; sudo make install
 #       run: sudo apt-get update -y; sudo apt-get install -y z3
     
 
