@@ -38,10 +38,9 @@ jobs:
 #     - name: Run Tests
 #       run: sbt test
     - name: print directory
-      run: pwd > print_dir.txt | ls -R >> print_dir.txt | cat print_dir.txt
-#       run: pwd > print_dir.txt | ls -R >> print_dir.txt | cat print_dir.txt
-#     - name: Upload directory content printout
-#       uses: actions/upload-artifact@v2
-#       with:
-#         name: directory_content_printout
-#         path: ${{ github.workspace }}/print_dir.txt
+      run: pwd > print_dir.txt | ls >> print_dir.txt | cat print_dir.txt
+    - name: Upload directory content printout
+      uses: actions/upload-artifact@v2
+      with:
+        name: directory_content_printout
+        path: ${{ github.workspace }}/print_dir.txt
