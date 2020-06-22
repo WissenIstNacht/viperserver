@@ -12,11 +12,13 @@ jobs:
     steps:
     - name: Checkout this repo
       uses: actions/checkout@v2
+      with:
+        path: main_repo
     - name: Checkout Silver repo
       uses: actions/checkout@v2
       with:
         repository: WissenIstNacht/Silver
-#        path: my-tools
+        path: util_repo_silver
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
       with:
