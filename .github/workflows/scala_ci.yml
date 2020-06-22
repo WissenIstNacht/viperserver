@@ -45,10 +45,10 @@ jobs:
         java-version: 1.8
     - name: Assemble project
       run: cd viperServer; sbt assembly
-#     - name: test project
-#       run: sbt test
+    - name: test project
+      run: sbt test
     - name: print directory
-      run: pwd > print_dir.txt | ls --recursive >> print_dir.txt | cat print_dir.txt
+      run: pwd > print_dir.txt ; ls --recursive >> print_dir.txt ; cat print_dir.txt
     - name: Upload directory content printout
       uses: actions/upload-artifact@v2
       with:
