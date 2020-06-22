@@ -1,0 +1,34 @@
+name: Scala CI
+
+on:
+  push:
+    branches: [  ci_testing  ]
+  pull_request:
+    branches: [  ci_testing  ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout this repo
+      uses: actions/checkout@v2
+    - name: Checkout Silver repo
+      uses: actions/checkout@v2
+        with:
+        repository: WissenIstNacht/Silver
+#        path: my-tools
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+#     - name: Run Compilation  
+#       run: sbt assembly
+#     - name: Run Tests
+#       run: sbt test
+    - name: print directory
+      run: pwd > print_dir.txt | ls >> print_dir.txt | cat print_dir.txt
+    - name: Upload directory content
+      uses: actions/upload-artifact@v2
+      with:
+        name: directory_content
+        path: ${{ github.workspace }}
