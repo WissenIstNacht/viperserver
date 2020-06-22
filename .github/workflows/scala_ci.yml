@@ -46,7 +46,7 @@ jobs:
     - name: Assemble project
       run: cd viperServer; sbt assembly
     - name: test project
-      run: sbt test
+      run: cd viperServer; sbt test
     - name: print directory
       run: pwd > print_dir.txt ; ls --recursive >> print_dir.txt ; cat print_dir.txt
     - name: Upload directory content printout
