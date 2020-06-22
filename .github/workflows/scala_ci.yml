@@ -10,15 +10,25 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout this repo
+    - name: Checkout ViperServer
       uses: actions/checkout@v2
       with:
-        path: main_repo
-    - name: Checkout Silver repo
+        path: viperServer
+    - name: Checkout Silver
       uses: actions/checkout@v2
       with:
         repository: WissenIstNacht/Silver
-        path: util_repo_silver
+        path: silver
+    - name: Checkout Silicon
+      uses: actions/checkout@v2
+      with:
+        repository: WissenIstNacht/Silicon
+        path: silicon
+    - name: Checkout Carbon
+      uses: actions/checkout@v2
+      with:
+        repository: WissenIstNacht/Carbon
+        path: carbon    
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
       with:
@@ -28,9 +38,9 @@ jobs:
 #     - name: Run Tests
 #       run: sbt test
     - name: print directory
-      run: pwd > print_dir.txt | ls >> print_dir.txt | cat print_dir.txt
-    - name: Upload directory content
+      run: pwd > print_dir.txt | ls -R >> print_dir.txt | cat print_dir.txt
+    - name: Upload directory content printout
       uses: actions/upload-artifact@v2
       with:
-        name: directory_content
-        path: ${{ github.workspace }}
+        name: directory_content_printout
+        path: ${{ github.workspace }}/print_dir.txt
