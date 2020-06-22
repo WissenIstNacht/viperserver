@@ -14,41 +14,46 @@ jobs:
       uses: actions/checkout@v2
       with:
         path: viperServer
-#     - name: Checkout Silver
-#       uses: actions/checkout@v2
+    - name: Checkout Silver
+      uses: actions/checkout@v2
+      with:
+        repository: WissenIstNacht/Silver
+        path: silver
+    - name: Checkout Silicon
+      uses: actions/checkout@v2
+      with:
+        repository: WissenIstNacht/Silicon
+        path: silicon
+    - name: Checkout Carbon
+      uses: actions/checkout@v2
+      with:
+        repository: WissenIstNacht/Carbon
+        path: carbon
+    - name: Symbolically link Silver to Carbon
+      run: cd carbon; ln --symbolic ../silver
+    - name: Symbolically link Silver to Silicon
+      run: cd silicon; ln --symbolic ../silver
+    - name: Symbolically link Silver to ViperServer
+      run: cd viperServer; ln --symbolic ../silver
+    - name: Symbolically link Carbon to ViperServer
+      run: cd viperServer; ln --symbolic ../carbon
+    - name: Symbolically link Silicon to ViperServer
+      run: cd viperServer; ln --symbolic ../silicon
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+    - name: Assemble project
+      run: cd viperServer; sbt assembly
+#     - name: Upload assembled projected
+#       uses: actions/upload-artifact@v2
 #       with:
-#         repository: WissenIstNacht/Silver
-#         path: silver
-#     - name: Checkout Silicon
-#       uses: actions/checkout@v2
-#       with:
-#         repository: WissenIstNacht/Silicon
-#         path: silicon
-#     - name: Checkout Carbon
-#       uses: actions/checkout@v2
-#       with:
-#         repository: WissenIstNacht/Carbon
-#         path: carbon
-#     - name: Symbolically link Silver to Carbon
-#       run: cd carbon; ln --symbolic ../silver
-#     - name: Symbolically link Silver to Silicon
-#       run: cd silicon; ln --symbolic ../silver
-#     - name: Symbolically link Silver to ViperServer
-#       run: cd viperServer; ln --symbolic ../silver
-#     - name: Symbolically link Carbon to ViperServer
-#       run: cd viperServer; ln --symbolic ../carbon
-#     - name: Symbolically link Silicon to ViperServer
-#       run: cd viperServer; ln --symbolic ../silicon
-#     - name: Set up JDK 1.8
-#       uses: actions/setup-java@v1
-#       with:
-#         java-version: 1.8
-#     - name: Assemble project
-#       run: cd viperServer; sbt assembly
+#         name: viperServer_jar
+#         path: ./
     - name: Install Z3
       run: sudo apt-get update -y; sudo apt-get install -y z3; export Z3_EXE="/usr/bin/z3"
-#     - name: test project
-#       run: cd viperServer; sbt test
+    - name: test project
+      run: cd viperServer; sbt test
     - name: print directory
       run: pwd > print_dir.txt ; ls --recursive >> print_dir.txt ; cat print_dir.txt
     - name: Upload directory content printout
