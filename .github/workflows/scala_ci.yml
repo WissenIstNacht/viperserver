@@ -36,9 +36,9 @@ jobs:
     - name: Symbolically link silver to ViperServer
       run: cd viperServer; ln --symbolic ../silver
     - name: Symbolically link carbon to viperServer
-      run: cd carbon; ln --symbolic ../carbon
+      run: cd viperServer; ln --symbolic ../carbon
     - name: Symbolically link silicon to viperServer
-      run: cd carbon; ln --symbolic ../silicon
+      run: cd viperServer; ln --symbolic ../silicon
 #     - name: Set up JDK 1.8
 #       uses: actions/setup-java@v1
 #       with:
