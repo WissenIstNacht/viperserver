@@ -45,19 +45,19 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-#     - name: Assemble project
-#       run: cd viperServer; sbt assembly
-#     - name: Upload assembled projected
+    - name: Assemble project
+      run: cd viperServer; sbt assembly
+#     - name: Upload assembled project
 #       uses: actions/upload-artifact@v2
 #       with:
 #         name: viperServer_jar
 #         path: ./
 
     - name: Install Z3
-      run: sudo apt-get update -y; sudo apt-get install -y z3; export Z3_EXE="/usr/bin/z3"
+      run: sudo apt-get update -y; sudo apt-get install -y z3;
       
-#     - name: test project
-#       run: cd viperServer; sbt test
+    - name: test project
+      run: cd viperServer; export Z3_EXE="/usr/bin/z3"; env > print_dir.txt; sbt test
       
 #     - name: print directory
 #       run: pwd > print_dir.txt ; ls --recursive >> print_dir.txt ; cat print_dir.txt
