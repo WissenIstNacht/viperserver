@@ -41,8 +41,8 @@ jobs:
     - name: Symbolically link Silicon to ViperServer
       run: cd viperServer; ln --symbolic ../silicon
     
-    - name: Install Z3
-      run: sudo apt-get update -y; sudo apt-get install -y z3=4.8.7;
+#     - name: Install Z3
+#       run: sudo apt-get update -y; sudo apt-get install -y z3=4.8.7;
 
 #     - name: Set up JDK 1.8
 #       uses: actions/setup-java@v1
@@ -59,8 +59,9 @@ jobs:
 #       run: cd viperServer; export Z3_EXE="/usr/bin/z3"; env > print_dir.txt; sbt test
       
 #     - name: print directory
-#       run: pwd > print_dir.txt ; ls --recursive >> print_dir.txt ; cat print_dir.txt
-
+#       run: pwd > print_dir.txt ; ls --recursive >> print_dir.txt ; cat print_dir.txt  
+    - name: print directory
+      run: apt-cache policy z3 > print_dir.txt ; cat print_dir.txt
     - name: print z3
       run: env > print_dir.txt
     - name: Upload directory content printout
