@@ -8,41 +8,48 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout ViperServer
       uses: actions/checkout@v2
       with:
         path: viperServer
-    - name: Checkout Silver
+#     - name: Checkout Silver
+#       uses: actions/checkout@v2
+#       with:
+#         repository: WissenIstNacht/Silver
+#         path: silver
+#     - name: Checkout Silicon
+#       uses: actions/checkout@v2
+#       with:
+#         repository: WissenIstNacht/Silicon
+#         path: silicon
+#     - name: Checkout Carbon
+#       uses: actions/checkout@v2
+#       with:
+#         repository: WissenIstNacht/Carbon
+#         path: carbon
+    - name: Checkout Z3
       uses: actions/checkout@v2
       with:
-        repository: WissenIstNacht/Silver
-        path: silver
-    - name: Checkout Silicon
-      uses: actions/checkout@v2
-      with:
-        repository: WissenIstNacht/Silicon
-        path: silicon
-    - name: Checkout Carbon
-      uses: actions/checkout@v2
-      with:
-        repository: WissenIstNacht/Carbon
-        path: carbon
+        repository: Z3Prover/z3
+        path: z3
     
-    - name: Symbolically link Silver to Carbon
-      run: cd carbon; ln --symbolic ../silver
-    - name: Symbolically link Silver to Silicon
-      run: cd silicon; ln --symbolic ../silver
-    - name: Symbolically link Silver to ViperServer
-      run: cd viperServer; ln --symbolic ../silver
-    - name: Symbolically link Carbon to ViperServer
-      run: cd viperServer; ln --symbolic ../carbon
-    - name: Symbolically link Silicon to ViperServer
-      run: cd viperServer; ln --symbolic ../silicon
+#     - name: Symbolically link Silver to Carbon
+#       run: cd carbon; ln --symbolic ../silver
+#     - name: Symbolically link Silver to Silicon
+#       run: cd silicon; ln --symbolic ../silver
+#     - name: Symbolically link Silver to ViperServer
+#       run: cd viperServer; ln --symbolic ../silver
+#     - name: Symbolically link Carbon to ViperServer
+#       run: cd viperServer; ln --symbolic ../carbon
+#     - name: Symbolically link Silicon to ViperServer
+#       run: cd viperServer; ln --symbolic ../silicon
     
     - name: Install Z3
-      run: sudo apt-get update -y; sudo apt-get install -y z3
+    - run: cd z3; python scripts/mk_make.py; cd build; make; sudo make install
+#       run: sudo apt-get update -y; sudo apt-get install -y z3
+    
 
 #     - name: Set up JDK 1.8
 #       uses: actions/setup-java@v1
@@ -62,10 +69,10 @@ jobs:
 #     - name: print directory
 #       run: pwd > print_dir.txt ; ls --recursive >> print_dir.txt ; cat print_dir.txt  
 
-    - name: print z3
-      run: apt-cache policy z3 > print_dir.txt
-    - name: Upload directory content printout
-      uses: actions/upload-artifact@v2
-      with:
-        name: directory_content_printout
-        path: ./print_dir.txt
+#     - name: print z3
+#       run: apt-cache policy z3 > print_dir.txt
+#     - name: Upload directory content printout
+#       uses: actions/upload-artifact@v2
+#       with:
+#         name: directory_content_printout
+#         path: ./print_dir.txt
